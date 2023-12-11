@@ -1,0 +1,1 @@
+Proyecto Maven para conexion a BD MySQL con Java.
