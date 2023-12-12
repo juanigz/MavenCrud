@@ -1,5 +1,7 @@
 package controlador;
 
+import java.sql.SQLException;
+
 import interfaz.VentanaForm;
 
 public class VentanaFormControlador 
@@ -8,6 +10,11 @@ public class VentanaFormControlador
 
     public static void mostrar()
     {
+        try {
+            System.out.println(Connector.getConnection().isClosed());
+        } catch (SQLException e) {
+            e.getMessage();
+        }
         formulario.setVisible(true);
     }
 }

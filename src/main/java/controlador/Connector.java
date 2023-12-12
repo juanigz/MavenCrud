@@ -2,12 +2,13 @@ package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 import javax.swing.JOptionPane;
 
 public class Connector {
 
 //    Atributos de conexión
-    private Connection conectar = null;
+    private static Connection conectar = null;
 
     private final String contrasena = "juani";
 
@@ -20,15 +21,30 @@ public class Connector {
     public Connection establecerConeccion() {
         try {
             conectar = DriverManager.getConnection(cadena, usuario, contrasena);
-            VentanaFormControlador.mostrar();
             JOptionPane.showMessageDialog(null, "Se conectó correctamente");
+            VentanaFormControlador.mostrar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar " + e.toString());
         }
         return conectar;
     }
 
-    public Connection getConnection() {
+    // public void cerrarConeccion()
+    // {
+    //     try
+    //     {
+    //         getConnection().isClosed();
+    //     }
+    //     catch(SQLException e)
+    //     {
+    //         e.getSQLState();
+    //     }
+    //     finally{
+    //         getConnection().close();
+    //     };
+    // }
+
+    public static Connection getConnection() {
         return conectar;
     }
 }

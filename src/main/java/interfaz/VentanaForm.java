@@ -1,6 +1,7 @@
 package interfaz;
 
 import controlador.Connector;
+import logica.Payaso;
 
 import java.awt.Font;
 import java.sql.Connection;
@@ -8,19 +9,24 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.LayoutStyle;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaForm extends JFrame {
+public class VentanaForm extends JFrame 
+{
 
     // Datos de conexion.
-    Connector cn = new Connector();
+    // Connector cn = new Connector();
     Connection con;
     DefaultTableModel model;
     Statement st;
@@ -28,32 +34,34 @@ public class VentanaForm extends JFrame {
     int id = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JPanel jPanel1;
+    private JPanel _panelBD;
+    private JPanel jPanel3;
+
     private JTable TablaDatos;
+    private JScrollPane jScrollPane1;
+
+    private JTextField _txtId;
+    private JTextField _txtNombre;
+    private JTextField _txtCircos;
+    private JTextField jTextField2;
+
+    private JLabel _labelId;
+    private JLabel _labelNombre;
+    private JLabel _labelCircos;
+    private JLabel _tituloPrincipal;
+    private JLabel jLabel5;
+
     private JButton _botonAgregar;
     private JButton _botonEliminar;
     private JButton _botonModificar;
     private JButton _botonLimpiar;
 
-    private JTextField _txtId;
-    private JTextField _txtNombre;
-    private JTextField _txtCircos;
-
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
     public VentanaForm() 
     {
         inicializar();
-        //setLocationRelativeTo(null);
         listar();
     }
 
@@ -74,20 +82,24 @@ public class VentanaForm extends JFrame {
         setLocationRelativeTo(null); // Centra la ventana en pantalla
         setResizable(false);
 
-        jTextField2 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new JPanel();
+        _panelBD = new JPanel();
+        jPanel3 = new JPanel();
+
+        TablaDatos = new JTable();
+        jScrollPane1 = new JScrollPane();
+
+        jTextField2 = new JTextField();
         _txtId = new JTextField();
         _txtNombre = new JTextField();
         _txtCircos = new JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaDatos = new JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        
+        _tituloPrincipal = new JLabel();
+        _labelId = new JLabel();
+        _labelNombre = new JLabel();
+        _labelCircos = new JLabel();
+        jLabel5 = new JLabel();
+
         _botonAgregar = new JButton();
         _botonModificar = new JButton();
         _botonEliminar = new JButton();
@@ -95,72 +107,64 @@ public class VentanaForm extends JFrame {
 
         jTextField2.setText("jTextField2");
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setBorder(BorderFactory.createTitledBorder("Datos"));
 
-        _txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
+        _labelId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        _labelId.setText("ID:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("ID:");
+        _labelNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        _labelNombre.setText("NOMBRE:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("NOMBRE:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("CIRCOS:");
+        _labelCircos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        _labelCircos.setText("CIRCOS:");
 
         _txtId.setEditable(false);
         _txtId.setEnabled(false);
 
         // jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sinfloo.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(_labelCircos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_labelNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_labelId, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(_txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(_txtId, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                         .addComponent(_txtNombre))
-                    .addComponent(_txtCircos, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_txtCircos, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(_txtId)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(_txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_txtCircos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(_labelId))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(_labelNombre)
+                    .addComponent(_txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(_txtCircos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_labelCircos))
                 .addGap(95, 95, 95))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
+        _panelBD.setBorder(BorderFactory.createTitledBorder("Lista"));
 
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,21 +186,21 @@ public class VentanaForm extends JFrame {
             TablaDatos.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
+        GroupLayout jPanel2Layout = new GroupLayout(_panelBD);
+        _panelBD.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("APLICACION - CRUD");
+        _tituloPrincipal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        _tituloPrincipal.setText("APLICACION - CRUD");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
+        jPanel3.setBorder(BorderFactory.createTitledBorder("Operaciones"));
 
         // btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user.png"))); // NOI18N
         _botonAgregar.setText("Agregar");
@@ -230,25 +234,25 @@ public class VentanaForm extends JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(_botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(_botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(_botonAgregar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(_botonModificar, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(_botonEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(_botonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_botonLimpiar, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(_botonAgregar)
                     .addComponent(_botonModificar)
                     .addComponent(_botonEliminar)
@@ -256,36 +260,36 @@ public class VentanaForm extends JFrame {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_tituloPrincipal, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
                         .addGap(147, 147, 147))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_panelBD, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(_tituloPrincipal)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(_panelBD, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,18 +323,14 @@ public class VentanaForm extends JFrame {
             JOptionPane.showMessageDialog(null, "No se Selecciono");
         } else {
             id = Integer.parseInt((String) TablaDatos.getValueAt(row, 0).toString());
-            String dni = (String) TablaDatos.getValueAt(row, 1);
-            String nom = (String) TablaDatos.getValueAt(row, 2);
+            String nombre = (String) TablaDatos.getValueAt(row, 1);
+            String circos = (String) TablaDatos.getValueAt(row, 2);
             _txtId.setText("" + id);
-            _txtNombre.setText(dni);
-            _txtCircos.setText(nom);
+            _txtNombre.setText(nombre);
+            _txtCircos.setText(circos);
 
         }
     }//GEN-LAST:event_TablaDatosMouseClicked
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDNIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,90 +367,122 @@ public class VentanaForm extends JFrame {
     //     });
     // }
 
-    void listar() {
+    private void listar() {
         String sql = "select * from payasos";
         try {
-            con = cn.getConnection();
+            con = Connector.getConnection();
             st = con.createStatement();
             rs = st.executeQuery(sql);
+
             Object[] payaso = new Object[3];
-//            String[] Titulos={"ID","DNI","NOMBRES"};         
-//            model=new DefaultTableModel(null,Titulos);   
+            // Payaso payaso = new Payaso();
+            String[] Titulos={"id","nombre","circos"};      
+            model=new DefaultTableModel(null,Titulos);
             model = (DefaultTableModel) TablaDatos.getModel();
+
             while (rs.next()) {
                 payaso[0] = rs.getInt("Id");
                 payaso[1] = rs.getString("Nombre");
                 payaso[2] = rs.getString("Circos");
+                System.out.println(payaso.toString());
                 model.addRow(payaso);
             }
+
+            // while (rs.next()) {
+            //     // Integer entero = rs.getInt("Id");
+            //     // payaso.setId(entero.toString());
+
+            //     payaso.setId(String.valueOf(rs.getInt("Id")));
+
+            //     payaso.setNombre(rs.getString("Nombre"));
+            //     payaso.setCircos(rs.getString("Circos"));
+            //     System.out.println(payaso.toString());
+            //     model.addRow(payaso);
+            // }
+            
             TablaDatos.setModel(model);
 
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
+            e.getMessage();
         }
 
     }
 
-    void Agregar() {
+    private void Agregar() {
         String nombre = _txtNombre.getText();
         String circos = _txtCircos.getText();
-        try {
+        try 
+        {
             if (nombre.equals("") || circos.equals("")) {
                 JOptionPane.showMessageDialog(null, "Debe Ingresar Datos");
                 limpiarTabla(model);               
-            } else {
-                String sql = "insert into payasos(nombre,circos) values('" + nombre + "','" + circos + "')";
-                con = cn.getConnection();
+            } 
+            else {
+                Payaso payaso = new Payaso(nombre, circos);
+                String sql = "INSERT INTO payasos (nombre, circos) VALUES ('" + payaso.getNombre() + "', '" + payaso.getCircos() + "')";
+                con = Connector.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
-                agregarExito();
-                JOptionPane.showMessageDialog(null, "Usuario Registrado con Exito");
+                exito("Payaso agregado con exito!");
+                JOptionPane.showMessageDialog(null, "Payaso Registrado con Exito");
                 limpiarTabla(model);
-                
             }
-
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
+            e.getMessage();
         }
-        
-        
     }
 
-    void Modificar() {
-        String nombre = _txtNombre.getText();
-        String circos = _txtCircos.getText();
-        String sql = "update persona set DNI='" + nombre + "',Nombres='" + circos + "' where Id=" + id;
+    private void Eliminar() {       
+        int fila = TablaDatos.getSelectedRow();
+        System.out.println("fuera " + fila);
         try {
-            if (nombre != null || circos != null) {
-                con = cn.getConnection();
+            if (fila < 0) 
+            {
+                System.out.println(fila);
+                JOptionPane.showMessageDialog(null,"Payaso no Seleccionado");
+            } 
+            else 
+            {
+                String sql = "delete from payasos where Id=" + id;
+                con = Connector.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Usuario Modificado");
+                exito("Payaso eliminado con exito!");
+                JOptionPane.showMessageDialog(null, "Payaso Eliminado");
+                // limpiarTabla(model);
+                // listar();
+                // actualizar();
+            }
+        }
+        catch(Exception e)
+        {
+            e.getMessage();
+        }
+    }
+
+    private void Modificar() {
+        String nombre = _txtNombre.getText();
+        String circos = _txtCircos.getText();
+        String sql = "update payaso set nombre='" + nombre + "',circos='" + circos + "' where Id=" + id;
+        try {
+            if (nombre != null || circos != null) {
+                con = Connector.getConnection();
+                st = con.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "Payaso Modificado");
                 limpiarTabla(model);
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Error...!!!");
             }
 
-        } catch (Exception e) {
-        }
-
-    }
-
-    void Eliminar() {
-        String sql = "delete from payasos where Id=" + id;        
-        int fila = TablaDatos.getSelectedRow();
-        if (fila < 0) {
-            JOptionPane.showMessageDialog(null,"Payaso no Seleccionado");
-        } else {
-                try {
-                    con = cn.getConnection();
-                    st = con.createStatement();
-                    st.executeUpdate(sql);
-                    JOptionPane.showMessageDialog(null, "Payaso Eliminado");
-                    limpiarTabla(model);
-                    
-                } catch (Exception e) {
-                }
-               
+        } catch (Exception e) 
+        {
+            e.getMessage();
         }
 
     }
@@ -469,15 +501,15 @@ public class VentanaForm extends JFrame {
         }
     }
 
-    private void agregarExito()
+    private void exito(String mensaje)
     {
         JTextArea textArea = new JTextArea();
         textArea.setBounds(0, 0, 180, 20);
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 15));
         textArea.setEditable(false);
         this.add(textArea);
-        textArea.setText("Mapa guardado con xito!");
-
+        textArea.setText(mensaje);
+        textArea.setVisible(true);
     }
 
     // private void actualizar(){
