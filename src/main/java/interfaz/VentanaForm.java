@@ -298,19 +298,27 @@ public class VentanaForm extends JFrame
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Agregar(); 
         listar();
-        limpiarFields();
+        // limpiarFields();
+        // limpiarTabla(model);
+        // listar();
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Modificar(); 
         listar();
-        limpiarFields();
+        // limpiarFields();
+        // limpiarTabla(model);
+        // listar();
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Eliminar();
-        listar();
-        limpiarFields();
+        // listar();
+        // limpiarFields();
+        // limpiarTabla(model);
+        // listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -399,15 +407,22 @@ public class VentanaForm extends JFrame
             //     System.out.println(payaso.toString());
             //     model.addRow(payaso);
             // }
-            
-            TablaDatos.setModel(model);
 
+
+            // if (payaso.length > 0) 
+            // {
+            //     Object seleccion = JOptionPane.showInputDialog(null, "Seleccionar", "Lista de Libros", 
+            //         JOptionPane.QUESTION_MESSAGE, null, payaso, payaso[0]);
+            
+            // TablaDatos.setModel(model);
+            // }
+
+            TablaDatos.setModel(model);
         } 
         catch (Exception e) 
         {
             e.getMessage();
         }
-
     }
 
     private void Agregar() {
@@ -436,7 +451,7 @@ public class VentanaForm extends JFrame
         }
     }
 
-    private void Eliminar() {       
+    private void Eliminar() {
         int fila = TablaDatos.getSelectedRow();
         System.out.println("fuera " + fila);
         try {
@@ -444,8 +459,9 @@ public class VentanaForm extends JFrame
             {
                 System.out.println(fila);
                 JOptionPane.showMessageDialog(null,"Payaso no Seleccionado");
-            } 
-            else 
+                // limpiarTabla(model);
+            }
+            else
             {
                 String sql = "delete from payasos where Id=" + id;
                 con = Connector.getConnection();
@@ -453,9 +469,9 @@ public class VentanaForm extends JFrame
                 st.executeUpdate(sql);
                 exito("Payaso eliminado con exito!");
                 JOptionPane.showMessageDialog(null, "Payaso Eliminado");
-                // limpiarTabla(model);
-                // listar();
-                // actualizar();
+                limpiarTabla(model);
+                listar();
+                
             }
         }
         catch(Exception e)
@@ -467,17 +483,21 @@ public class VentanaForm extends JFrame
     private void Modificar() {
         String nombre = _txtNombre.getText();
         String circos = _txtCircos.getText();
-        String sql = "update payaso set nombre='" + nombre + "',circos='" + circos + "' where Id=" + id;
         try {
-            if (nombre != null || circos != null) {
+            if ( !nombre.isBlank() || !circos.isBlank() ) 
+            {
+
+                Payaso payaso = new Payaso(nombre, circos);
+                String sql = "update payasos set nombre='" + payaso.getNombre() + "',circos='" + payaso.getCircos() + "' where Id='" + id + "'";
                 con = Connector.getConnection();
                 st = con.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "Payaso Modificado");
                 limpiarTabla(model);
-                
-            } else {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "Error...!!!");
+                limpiarTabla(model);
             }
 
         } catch (Exception e) 
@@ -495,6 +515,10 @@ public class VentanaForm extends JFrame
     }
 
     private void limpiarTabla(DefaultTableModel model) {
+        if (TablaDatos.getRowCount() < 0 )
+        {
+            return;
+        }
         for (int i = 0; i <= TablaDatos.getRowCount(); i++) {
             model.removeRow(i);
             i = i - 1;
@@ -512,8 +536,8 @@ public class VentanaForm extends JFrame
         textArea.setVisible(true);
     }
 
-    // private void actualizar(){
-    //     limpiarTabla(model);
-    //     listar();
-    // }
+    private void actualizar(){
+        limpiarTabla(model);
+        listar();
+    }
 }
