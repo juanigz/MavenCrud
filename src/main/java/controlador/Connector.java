@@ -13,13 +13,14 @@ public class Connector {
 
     private final String usuario = "root";
 
-    private final String db = "cohorte2";
+    private final String db = "payasos";
 
     private final String cadena = "jdbc:mysql://localhost:3306/" + db;
 
     public Connection establecerConeccion() {
         try {
             conectar = DriverManager.getConnection(cadena, usuario, contrasena);
+            VentanaFormControlador.mostrar();
             JOptionPane.showMessageDialog(null, "Se conectó correctamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar " + e.toString());
