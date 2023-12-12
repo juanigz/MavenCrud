@@ -28,4 +28,7 @@ public class Connector {
         return conectar;
     }
 
+    public Connection getConnection() {
+        return conectar;
+    }
 }
