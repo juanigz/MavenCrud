@@ -461,7 +461,7 @@ public class VentanaForm extends JFrame
                 JOptionPane.showMessageDialog(null,"Payaso no Seleccionado");
                 // limpiarTabla(model);
             }
-            else
+            else //esto de aca funciona, pero elimina la muestra de la tabla. cuando no deberia.
             {
                 String sql = "delete from payasos where Id=" + id;
                 con = Connector.getConnection();
