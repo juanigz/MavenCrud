@@ -3,6 +3,7 @@ package controlador;
 import java.sql.SQLException;
 
 import interfaz.VentanaForm;
+import logica.Payaso;
 
 public class VentanaFormControlador 
 {
@@ -11,10 +12,15 @@ public class VentanaFormControlador
     public static void mostrar()
     {
         try {
-            System.out.println(Connector.getConnection().isClosed());
+            System.out.println("conexion cerrada? : " + Connector.getConnection().isClosed());
         } catch (SQLException e) {
             e.getMessage();
         }
         formulario.setVisible(true);
+    }
+
+    public static Payaso generarPayaso(String nombre, String circos)
+    {
+        return new Payaso(nombre, circos);
     }
 }

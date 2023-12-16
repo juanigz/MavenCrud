@@ -45,5 +45,12 @@ El proyecto consiste en un CRUD (create, read, update, delete) sencillo que le p
 La aplicación se basa en el patrón de diseño MVC. Utiliza una interfaz sencilla desde donde se observa toda la interfaz para interactuar con la base de datos.
 Para lograr esto, primero se debe realizar con éxito la conexión a la BD, en este caso usando la base de datos relacional MySQL, esta conexión se logra con las clases Connector donde se encuentra la lógica necesaria para acceder a la BD y a su vez inicializar el formulario, y la clase Principal, donde se ejecuta el proyecto.
 En el paquete logica nos encontramos con una única clase para facilitar las inserciones necesarias para cumplir con los objetivos del proyecto.
-La aplicación logra ofrecer confort al usuario con el uso dinámico y una visualización actualizable en tiempo real de la base de datos.
+La aplicación logra ofrecer al usuario uso dinámico y una visualización actualizable en tiempo real de la base de datos.
 
+ - Atención: se puedn registrar payasos con los mismos atributos ya que se crea un ID diferente automáticamente para cada uno.
+ la BD parametriza los argumentos solicitados limitando los nombres a un maximo de 25 caracteres y los circos a un maximo de 5 caracteres, ninguno de estos datos puede estar vacio.
+ la BD no permite registrar payasos con alguno de estos campos vacios.
+ para "agregar" solo se necesita rellenar los datos dentro de los parámetros aceptados, el ID es generado automáticamente.
+ para "modificar" y/o "eliminar", se debe seleccionar un elemento dentro de la tabla que representa visualmente los registros de la base de datos, de lo contrario no será posible acción alguna.
+
+ 
